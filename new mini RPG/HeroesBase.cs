@@ -8,8 +8,8 @@ namespace new_mini_RPG
     {
         public int HP { get; private set; } //сет публичный так нельзя и нет ограничений
         public int Damage { get; private set; }
-        public string Name { get; set; }
-        private bool _life{get; set;}//getset
+        public string Name { get; private set; }
+        public bool _life{get; private set;}//getset
         Random randomGenerator = new Random();
         public HeroesBase( int hp, int damage, string name, bool life)
         {            
@@ -34,12 +34,7 @@ namespace new_mini_RPG
                 _life = true;
             }  
         }
-        public int GettingInaccuracy(int damage)//где применяется?
-        {
-            int inaccuracy = randomGenerator.Next(-damage / 3, damage / 3);
-            return inaccuracy;
-        }
-        public int Damaging(int damage)//зачем принимать разброс?
+        public int Damaging(int damage)
         {
             int inaccuracy = randomGenerator.Next(-damage / 3, damage / 3);
             HP = HP - (damage + inaccuracy);

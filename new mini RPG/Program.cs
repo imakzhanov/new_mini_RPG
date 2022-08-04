@@ -4,7 +4,7 @@ namespace new_mini_RPG
 {
     class Program
     {
-        public static int GetNumber(int maxCount)
+        public static int GetNumber(int maxCount = 4)
         {
             int number = 0;
             string input = Console.ReadLine();
@@ -21,17 +21,25 @@ namespace new_mini_RPG
         {
 
             Random randomGenerator = new Random();
-            Teams yourTeam = new Teams();
-            Teams computerTeam = new Teams();
-
             Console.Write("Придумай название своей команде: ");//-------------------------------Выбор названий команд
-            yourTeam.Name = Console.ReadLine();
-            computerTeam.Name = "Компьютер";//нужно из списка выбирать
+            Teams yourTeam = new Teams(Console.ReadLine());//Создание команды игрока 
+            string computerName;
+            if (randomGenerator.Next(2) == 0)
+            {
+                computerName = "Доминаторы";
+            }
+            else
+            {
+                computerName = "Непобедимые";
+            }
+            Teams computerTeam = new Teams(computerName);
+            Console.WriteLine($"Компьютер выбрал название {computerName}.");
             Console.WriteLine("Для продолжения нажмите Enter...");
             Console.ReadLine();
             Console.Clear();
 
-            for (int i = 0; i < 3; i++)//-----------------------------------------Выбор Игрока
+            
+            for (int i = 0; i < 3; i++)//-----------------------------------------Выбор перснажей Игроком
             {
                 bool flag = false;
                 Console.WriteLine("Выберите персонажа:");
@@ -42,10 +50,10 @@ namespace new_mini_RPG
                 while (!flag)
                 {
                     HeroesBase hero;
-                    switch (GetNumber(4))
+                    switch (GetNumber())
                     {
-                        case 0: //можно так
-                            hero = new Ork();//но тогда переменную объявить раньше
+                        case 0:
+                            hero = new Ork();
                             flag = yourTeam.HeroAdd(hero);
                             break;
                         case 1:
@@ -74,7 +82,7 @@ namespace new_mini_RPG
             }
             Console.Clear();
 
-            for (int i = 0; i < 3; i++)//--------------------------------------Выбор компьютера
+            for (int i = 0; i < 3; i++)//--------------------------------------Выбор персонажей компьютером
             {
                 bool access = false;
                 while (!access)
@@ -144,7 +152,7 @@ namespace new_mini_RPG
                 string yourAttackingHeroName = yourTeam.GettingAttackingHeroName(attackingPlayerHero);
                 Console.Clear();
 
-                computerTeam.Damaging(playerTarget, yourAttackingHeroDamage, yourAttackingHeroName, yourTeam.Name);//-------------атака игрока
+                computerTeam.Damaging(playerTarget, yourAttackingHeroDamage, yourAttackingHeroName, yourTeam.Name);//атака игрока
                 Console.WriteLine("Для продолжения нажмите Enter...");
                 Console.ReadLine();
                 Console.Clear();
@@ -167,7 +175,7 @@ namespace new_mini_RPG
                     int computerAttackingHeroDamage = computerTeam.GettingAttackingHeroDamage(attackingComputerHero);
                     string computerAttackingHeroName = computerTeam.GettingAttackingHeroName(attackingComputerHero);
                     Console.Clear();
-                    yourTeam.Damaging(computerTarget, computerAttackingHeroDamage, computerAttackingHeroName, computerTeam.Name);//-------------атака компьютера
+                    yourTeam.Damaging(computerTarget, computerAttackingHeroDamage, computerAttackingHeroName, computerTeam.Name);//атака компьютера
                     Console.WriteLine("Для продолжения нажмите Enter...");
                     Console.ReadLine();
                 }

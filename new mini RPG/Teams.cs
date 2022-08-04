@@ -6,10 +6,11 @@ namespace new_mini_RPG
 {
     class Teams
     {
-        public string Name{ get; set;}
+        public string Name{ get; private set;}
         public List<HeroesBase> Heroes{ get; private set;}//должен быть приватным
-        public Teams()
+        public Teams(string name)
         {
+            Name = name;
             Heroes = new List<HeroesBase>();
         }
         public bool HeroAdd(HeroesBase hero)
@@ -54,6 +55,7 @@ namespace new_mini_RPG
         {
             return Heroes[attackingHero].Name;
         }
+        
         //не вижу метода принятия урона
         public void Damaging(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
         {
