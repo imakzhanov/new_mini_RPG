@@ -9,37 +9,45 @@ namespace new_mini_RPG
         public int HP { get; private set; } //сет публичный так нельзя и нет ограничений
         public int Damage { get; private set; }
         public string Name { get; private set; }
-        public bool _life{get; private set;}//getset
+        public bool Life{get; private set;}//getset
         Random randomGenerator = new Random();
-        public HeroesBase( int hp, int damage, string name, bool life)
+        public HeroesBase( int hp, int damage, string name)
         {            
             HP = hp;
             Damage = damage;
             Name = name;
-            _life = true;
+            Life = true;
         }
-        public bool GetLife()
+        public int GetDamage()
         {
-            return _life;
+            return Damage + randomGenerator.Next(-Damage / 3, Damage / 3);
+        }
+        private void SetHP(int damage) 
+        {
+            if (damage >= HP)
+            {
+                HP = 0;
+            }
+            else
+            {
+                HP = HP - damage;
+            }
         }
         private void SetLife()
         {
             if (HP <= 0) 
             {
-                HP = 0;
-                _life = false;
+                Life = false;
             }
             else
             {
-                _life = true;
+                Life = true;
             }  
         }
-        public int Damaging(int damage)
+        public void Damaging(int damage)
         {
-            int inaccuracy = randomGenerator.Next(-damage / 3, damage / 3);
-            HP = HP - (damage + inaccuracy);
+            SetHP(damage);
             SetLife();
-            return damage + inaccuracy;
         }
         public void ShowInfo()   
         {

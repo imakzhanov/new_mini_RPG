@@ -15,7 +15,7 @@ namespace new_mini_RPG
         }
         public bool HeroAdd(HeroesBase hero)
         {
-            Type t = hero.GetType();
+            Type t = hero.GetType(); 
             for (int i = 0; i < Heroes.Count; i++)
             {
                 Type t1 = Heroes[i].GetType();
@@ -32,8 +32,7 @@ namespace new_mini_RPG
         //-------------------------------------------------------------------------------------------атака
         public bool HeroLiveCheck(int hero)
         {
-            bool life = Heroes[hero].GetLife();
-            return life;
+            return Heroes[hero].Life;
         }
         public bool TeamLiveCheck()
         {
@@ -55,12 +54,16 @@ namespace new_mini_RPG
         {
             return Heroes[attackingHero].Name;
         }
+        public int GetttingFullDamage(int attackingHero)
+        {
+            return Heroes[attackingHero].GetDamage();
+        }
         
         //не вижу метода принятия урона
-        public void Damaging(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
+        public void GetttingDamage(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
         {
-            int allDamage = Heroes[target].Damaging(attackingHeroDamage);
-            Console.WriteLine($"{attackingHeroName}({attackingTeamName}) нанес {allDamage} урона {Heroes[target].Name}у({Name}).");
+            Heroes[target].Damaging(attackingHeroDamage);
+            Console.WriteLine($"{attackingHeroName}({attackingTeamName}) нанес {attackingHeroDamage} урона {Heroes[target].Name}у({Name}).");
         }
         //-------------------------------------------------------------------------------------------атака
         public void ShowInfo()

@@ -6,7 +6,7 @@ namespace new_mini_RPG
 {
     class Shaman : HeroesBase
     {
-        public Shaman() : base(400, 80, "Шаман", true)
+        public Shaman() : base(400, 80, "Шаман")
         {            
         }
 

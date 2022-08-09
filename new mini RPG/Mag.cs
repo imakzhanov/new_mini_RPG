@@ -6,7 +6,7 @@ namespace new_mini_RPG
 {
     class Mag : HeroesBase
     {
-        public Mag() :base(300, 100 , "Маг", true)
+        public Mag() :base(300, 100 , "Маг")
         {
             
         }

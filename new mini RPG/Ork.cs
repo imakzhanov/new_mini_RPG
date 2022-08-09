@@ -6,7 +6,7 @@ namespace new_mini_RPG
 {
     class Ork : HeroesBase
     {
-        public Ork(): base(600, 100, "Орк", true)
+        public Ork(): base(600, 100, "Орк")
         { 
           
         }
