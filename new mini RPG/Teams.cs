@@ -7,7 +7,7 @@ namespace new_mini_RPG
     class Teams
     {
         public string Name{ get; private set;}
-        private List<HeroesBase> Heroes{ get; set;}//должен быть приватным
+        private List<HeroesBase> Heroes{ get; set;}
         public Teams(string name)
         {
             Name = name;
@@ -59,7 +59,6 @@ namespace new_mini_RPG
         }
         
         
-        //не вижу метода принятия урона
         public void GettingDamage(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
         {
             Heroes[target].SettingLiveAndHP(attackingHeroDamage);
