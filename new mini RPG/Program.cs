@@ -16,7 +16,6 @@ namespace new_mini_RPG
             number = number - 1;
             return number;
         }
-
         static void Main(string[] args)
         {
 
@@ -41,39 +40,38 @@ namespace new_mini_RPG
             
             for (int i = 0; i < 3; i++)//-----------------------------------------Выбор перснажей Игроком
             {
-                bool flag = false;
+                bool access = false;
                 Console.WriteLine("Выберите персонажа:");
                 Console.WriteLine("1 - Орк");
                 Console.WriteLine("2 - Шаман");
                 Console.WriteLine("3 - Воин");
                 Console.WriteLine("4 - Маг");
-                while (!flag)
+                while (!access)
                 {
                     HeroesBase hero;
                     switch (GetNumber())
                     {
                         case 0:
                             hero = new Ork();
-                            flag = yourTeam.HeroAdd(hero);
+                            access = yourTeam.HeroAdd(hero);
                             break;
                         case 1:
                             hero = new Shaman();
-                            flag = yourTeam.HeroAdd(hero);
+                            access = yourTeam.HeroAdd(hero);
                             break;
                         case 2:
                             hero = new Knight();
-                            flag = yourTeam.HeroAdd(hero);
+                            access = yourTeam.HeroAdd(hero);
                             break;
                         case 3:
                             hero = new Mag();
-                            flag = yourTeam.HeroAdd(hero);
+                            access = yourTeam.HeroAdd(hero);
                             break;
                         default:
                             Console.WriteLine("Ошибка!!!");
                             break;
-
                     }
-                    if (flag)
+                    if (access)
                     {
                         Console.WriteLine("Вы добавили персонажа");
                         Console.Clear();
@@ -110,7 +108,6 @@ namespace new_mini_RPG
                         default:
                             Console.WriteLine("Ошибка!!!");
                             break;
-
                     }
                 }
             }
@@ -122,52 +119,48 @@ namespace new_mini_RPG
                 computerTeam.ShowInfo();
 
                 Console.WriteLine("Выбери, кем атаковать:");
-                int attackingPlayerHero = GetNumber(yourTeam.Heroes.Count);
-                while (!yourTeam.HeroLiveCheck(attackingPlayerHero))//можно чуть лучше
+                int attackingPlayerHero = GetNumber(yourTeam.GettingHeroesCount());
+                while (!yourTeam.HeroLiveCheck(attackingPlayerHero))
                 {
                     Console.WriteLine("Ваш герой уже мертв.");
                     Console.WriteLine("Выбери, кем атаковать:");
-                    attackingPlayerHero = GetNumber(yourTeam.Heroes.Count);
+                    attackingPlayerHero = GetNumber(yourTeam.GettingHeroesCount());
                 }
                 
                 Console.WriteLine("Выбери, кого атаковать:");
-                int playerTarget = GetNumber(yourTeam.Heroes.Count);
+                int playerTarget = GetNumber(yourTeam.GettingHeroesCount());
                 while (!computerTeam.HeroLiveCheck(playerTarget))
                 {
                     Console.WriteLine("Цель уже мертва.");
                     Console.WriteLine("Выбери, кого атаковать:");
-                    playerTarget = GetNumber(yourTeam.Heroes.Count);
+                    playerTarget = GetNumber(yourTeam.GettingHeroesCount());
                 }
-
-                //не забывай разделять
-                int yourAttackingHeroDamage = yourTeam.GettingAttackingHeroDamage(attackingPlayerHero);
-                string yourAttackingHeroName = yourTeam.GettingAttackingHeroName(attackingPlayerHero);
                 Console.Clear();
                 
-                computerTeam.GetttingDamage(playerTarget, yourTeam.GetttingFullDamage(attackingPlayerHero), yourAttackingHeroName, yourTeam.Name);//атака игрока
+                computerTeam.GettingDamage(playerTarget, yourTeam.GettingFullDamage(attackingPlayerHero),
+                    yourTeam.GettingAttackingHeroName(attackingPlayerHero), yourTeam.Name);//атака игрока
                 Console.WriteLine("Для продолжения нажмите Enter...");
                 Console.ReadLine();
                 Console.Clear();
                 
                 if (computerTeam.TeamLiveCheck())
                 {
-                    int attackingComputerHero = randomGenerator.Next(computerTeam.Heroes.Count);
+                    int attackingComputerHero = randomGenerator.Next(computerTeam.GettingHeroesCount());
                     computerTeam.HeroLiveCheck(attackingComputerHero);
                     while (!computerTeam.HeroLiveCheck(attackingComputerHero))
                     {
-                        attackingComputerHero = randomGenerator.Next(computerTeam.Heroes.Count);
+                        attackingComputerHero = randomGenerator.Next(computerTeam.GettingHeroesCount());
                     }
 
-                    int computerTarget = randomGenerator.Next(computerTeam.Heroes.Count);
+                    int computerTarget = randomGenerator.Next(computerTeam.GettingHeroesCount());
                     while (!yourTeam.HeroLiveCheck(computerTarget))
                     {
-                        computerTarget = randomGenerator.Next(computerTeam.Heroes.Count);
+                        computerTarget = randomGenerator.Next(computerTeam.GettingHeroesCount());
                     }
 
-                    int computerAttackingHeroDamage = computerTeam.GettingAttackingHeroDamage(attackingComputerHero);
                     string computerAttackingHeroName = computerTeam.GettingAttackingHeroName(attackingComputerHero);
                     Console.Clear();
-                    yourTeam.GetttingDamage(computerTarget, computerTeam.GetttingFullDamage(attackingComputerHero), computerAttackingHeroName, computerTeam.Name);//атака компьютера
+                    yourTeam.GettingDamage(computerTarget, computerTeam.GettingFullDamage(attackingComputerHero), computerAttackingHeroName, computerTeam.Name);//атака компьютера
                     Console.WriteLine("Для продолжения нажмите Enter...");
                     Console.ReadLine();
                 }

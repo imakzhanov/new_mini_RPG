@@ -7,7 +7,7 @@ namespace new_mini_RPG
     class Teams
     {
         public string Name{ get; private set;}
-        public List<HeroesBase> Heroes{ get; private set;}//должен быть приватным
+        private List<HeroesBase> Heroes{ get; set;}//должен быть приватным
         public Teams(string name)
         {
             Name = name;
@@ -15,11 +15,11 @@ namespace new_mini_RPG
         }
         public bool HeroAdd(HeroesBase hero)
         {
-            Type t = hero.GetType(); 
+            Type newHeroType = hero.GetType(); 
             for (int i = 0; i < Heroes.Count; i++)
             {
-                Type t1 = Heroes[i].GetType();
-                if (t == t1)
+                Type HeroType = Heroes[i].GetType();
+                if (newHeroType == HeroType)
                 {
                     Console.WriteLine("Герой уже Выбран.");
                     return false;
@@ -28,7 +28,10 @@ namespace new_mini_RPG
             Heroes.Add(hero);
             return true;
         }
-
+        public int GettingHeroesCount()
+        {
+            return Heroes.Count;
+        }
         //-------------------------------------------------------------------------------------------атака
         public bool HeroLiveCheck(int hero)
         {
@@ -46,23 +49,20 @@ namespace new_mini_RPG
             }
             return teamLive;
         }
-        public int GettingAttackingHeroDamage(int attackingHero)
+        public int GettingFullDamage(int attackingHero)
         {
-            return Heroes[attackingHero].Damage;
+            return Heroes[attackingHero].GetDamage();
         }
         public string GettingAttackingHeroName(int attackingHero)
         {
             return Heroes[attackingHero].Name;
         }
-        public int GetttingFullDamage(int attackingHero)
-        {
-            return Heroes[attackingHero].GetDamage();
-        }
+        
         
         //не вижу метода принятия урона
-        public void GetttingDamage(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
+        public void GettingDamage(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName)
         {
-            Heroes[target].Damaging(attackingHeroDamage);
+            Heroes[target].SettingLiveAndHP(attackingHeroDamage);
             Console.WriteLine($"{attackingHeroName}({attackingTeamName}) нанес {attackingHeroDamage} урона {Heroes[target].Name}у({Name}).");
         }
         //-------------------------------------------------------------------------------------------атака
