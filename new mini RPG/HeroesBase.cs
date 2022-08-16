@@ -18,15 +18,21 @@ namespace new_mini_RPG
             Name = name;
             Life = true;
         }
-        public int GetHP()
-        {
-            return HP;
-        }
+
+        /// <summary>
+        /// creates damage spread and adds it to main damage
+        /// </summary>
+        /// <returns>returns damage with spread</returns>
         public int GetDamage()
         {
             return Damage + randomGenerator.Next(-Damage / 3, Damage / 3);
         }
-        private void SetHP(int damage) 
+
+        /// <summary>
+        /// reducts HP 
+        /// </summary>
+        /// <param name="damage">param that takes part in changing HP</param>
+        private void ReductionHP(int damage) 
         {
             if (damage >= HP)
             {
@@ -37,6 +43,9 @@ namespace new_mini_RPG
                 HP = HP - damage;
             }
         }
+        /// <summary>
+        /// set life (HP <= 0 - false)(HP > 0 - true)
+        /// </summary>
         private void SetLife()
         {
             if (HP <= 0) 
@@ -48,14 +57,21 @@ namespace new_mini_RPG
                 Life = true;
             }  
         }
+        /// <summary>
+        /// appeales to ReductionHP and SetLife
+        /// </summary>
+        /// <param name="damage">takes part in ReductionHP</param>
         public void SettingLiveAndHP(int damage)
         {
-            SetHP(damage);
+            ReductionHP(damage);
             SetLife();
         }
+        /// <summary>
+        /// shows info of 1 hero (Name, Damage, present HP)
+        /// </summary>
         public void ShowInfo()   
         {
-            Console.WriteLine($"Герой:{Name}|Урон:{Damage}|Здоровье:{GetHP()}");
+            Console.WriteLine($"Герой:{Name}|Урон:{Damage}|Здоровье:{HP}");
         }
 
 

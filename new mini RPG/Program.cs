@@ -4,6 +4,11 @@ namespace new_mini_RPG
 {
     class Program
     {
+        /// <summary>
+        /// gets number from user from 1 to 3 or 4
+        /// </summary>
+        /// <param name="maxCount">max count that user can enter(3 or 4)</param>
+        /// <returns>number that user entered</returns>
         public static int GetNumber(int maxCount = 4)
         {
             int number = 0;
@@ -16,10 +21,11 @@ namespace new_mini_RPG
             number = number - 1;
             return number;
         }
+
         static void Main(string[] args)
         {
-
             Random randomGenerator = new Random();
+
             Console.Write("Придумай название своей команде: ");//-------------------------------Выбор названий команд
             Teams yourTeam = new Teams(Console.ReadLine());//Создание команды игрока 
             string computerName;
@@ -111,7 +117,7 @@ namespace new_mini_RPG
                     }
                 }
             }
-            bool winCheck = true; 
+            bool winCheck = true;
             while (winCheck)//---------------------------------------------------------------основной цикл
             {
                 Console.Clear();
